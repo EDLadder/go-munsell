@@ -8,4 +8,4 @@ listen:
   bind_ip: 0.0.0.0
   port: 10000
 user_service:
-  url: http://ns-user_service:10005/api
+  url: http://munsell-user-service:10005/api

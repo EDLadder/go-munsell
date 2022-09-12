@@ -1,0 +1,28 @@
+version: '3.9'
+
+services:
+  api-gateway:
+    restart: always
+    container_name: munsell-api-gateway
+    build: ./gw_munsell
+    depends_on:
+      - user-service
+    ports:
+      - 10000:10000
+  user-mongodb:
+    image: 'mongo:5.0'
+    container_name: 'munsell-user-mongodb'
+    restart: always
+    ports:
+      - '27017:27017'
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mongoadm
+      - MONGO_INITDB_ROOT_PASSWORD=mongoadm
+    volumes:
+      - ./user_service_munsell/init.js:/docker-entrypoint-initdb.d/init.js:ro
+  user-service:
+      restart: always
+      container_name: munsell-user-service
+      build: ./user_service_munsell
+      depends_on:
+        - user-mongodb
