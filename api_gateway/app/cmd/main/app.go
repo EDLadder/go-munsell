@@ -11,9 +11,11 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/EDLadder/go-munsell/api_gateway/internal/client/note_service"
 	"github.com/EDLadder/go-munsell/api_gateway/internal/client/user_service"
 	"github.com/EDLadder/go-munsell/api_gateway/internal/config"
 	"github.com/EDLadder/go-munsell/api_gateway/internal/handlers/auth"
+	"github.com/EDLadder/go-munsell/api_gateway/internal/handlers/notes"
 	"github.com/EDLadder/go-munsell/api_gateway/pkg/cache/freecache"
 	"github.com/EDLadder/go-munsell/api_gateway/pkg/handlers/metric"
 	"github.com/EDLadder/go-munsell/api_gateway/pkg/jwt"
@@ -45,6 +47,10 @@ func main() {
 	userService := user_service.NewService(cfg.UserService.URL, "/users", logger)
 	authHandler := auth.Handler{JWTHelper: jwtHelper, UserService: userService, Logger: logger}
 	authHandler.Register(router)
+
+	noteService := note_service.NewService(cfg.NoteService.URL, "/notes", logger)
+	notesHandler := notes.Handler{NoteService: noteService, Logger: logger}
+	notesHandler.Register(router)
 
 	logger.Println("start application")
 	start(router, logger, cfg)

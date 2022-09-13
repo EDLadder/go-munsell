@@ -3,26 +3,26 @@ package config
 import (
 	"sync"
 
-	"github.com/EDLadder/go-munsell/api_gateway/pkg/logging"
+	"github.com/EDLadder/go-munsell/note_service/pkg/logging"
 	"github.com/ilyakaznacheev/cleanenv"
 )
 
 type Config struct {
 	IsDebug *bool `yaml:"is_debug"`
-	JWT     struct {
-		Secret string `yaml:"secret" env-required:"true"`
-	}
-	Listen struct {
+	Listen  struct {
 		Type   string `yaml:"type" env-default:"port"`
 		BindIP string `yaml:"bind_ip" env-default:"localhost"`
-		Port   string `yaml:"port" env-default:"8080"`
+		Port   string `yaml:"port" env-default:"88080"`
 	}
-	UserService struct {
-		URL string `yaml:"url" env-required:"true"`
-	} `yaml:"user_service" env-required:"true"`
-	NoteService struct {
-		URL string `yaml:"url" env-required:"true"`
-	} `yaml:"note_service" env-required:"true"`
+	MongoDB struct {
+		Host       string `yaml:"host" env-required:"true"`
+		Port       string `yaml:"port" env-required:"true"`
+		Username   string `yaml:"username"`
+		Password   string `yaml:"password"`
+		AuthDB     string `yaml:"auth_db" env-required:"true"`
+		Database   string `yaml:"database" env-required:"true"`
+		Collection string `yaml:"collection" env-required:"true"`
+	} `yaml:"mongodb" env-required:"true"`
 }
 
 var instance *Config

@@ -8,4 +8,6 @@ listen:
   bind_ip: 0.0.0.0
   port: 10000
 user_service:
-  url: http://user-service:10005/api
+  url: http://user-service:10001/api
+note_service:
+  url: http://note-service:10002/api
