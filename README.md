@@ -1,5 +1,6 @@
 # GoLang Munsell
 
 ## Struncture
-1. gw_munsell
-2. user_sv_munsell
+1. api_gateway
+2. user_service
+3. note_service

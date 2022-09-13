@@ -1,0 +1,11 @@
+---
+
+is_debug: true
+jwt:
+  secret: $eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTY2MjIyNDAzNCwiaWF0IjoxNjYyMjI0MDM0fQ.20XguAbsHM0cJ7cqUzFNgRMjS-XzDdIQxo4TlWlnVrs
+listen:
+  type: port
+  bind_ip: 0.0.0.0
+  port: 10000
+user_service:
+  url: http://user-service:10005/api
