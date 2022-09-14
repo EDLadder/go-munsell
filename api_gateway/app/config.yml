@@ -10,4 +10,4 @@ listen:
 user_service:
   url: http://user-service:10001/api
 note_service:
-  url: http://note-service:10002/api
+  url: http://note-service:10003/api
