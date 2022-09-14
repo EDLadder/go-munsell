@@ -8,6 +8,7 @@ services:
     build: ./api_gateway
     depends_on:
       - user-service
+      - organization-service
       - note-service
     ports:
       - 10000:10000
@@ -27,6 +28,22 @@ services:
       build: ./user_service
       depends_on:
         - user-mongodb
+  # Organization microservice
+  organization-mongodb:
+    image: 'mongo:5.0'
+    container_name: 'organization-mongodb'
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mongoadm
+      - MONGO_INITDB_ROOT_PASSWORD=mongoadm
+    volumes:
+      - ./organization_service/init.js:/docker-entrypoint-initdb.d/init.js:ro
+  organization-service:
+    restart: always
+    container_name: organization-service
+    build: ./organization_service
+    depends_on:
+      - organization-mongodb
   # Note microservice
   note-mongodb:
     image: 'mongo:5.0'
